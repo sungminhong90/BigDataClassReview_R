@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566376200436.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "884356769",
+    "id" : "44A05BE3",
+    "lastKnownWriteTime" : 1566396666,
+    "last_content_update" : 1566396666488,
+    "path" : "C:/Users/LGULTRA/Desktop/R/2019_08_21/01_2019_08_21_mpg.R",
+    "project_path" : "01_2019_08_21_mpg.R",
+    "properties" : {
+        "cursorPosition" : "124,0",
+        "scrollLine" : "116",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

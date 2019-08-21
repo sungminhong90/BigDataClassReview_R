@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566376492959.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3111152379",
+    "id" : "BA9B96DA",
+    "lastKnownWriteTime" : 1566390144,
+    "last_content_update" : 1566390144664,
+    "path" : "C:/Users/LGULTRA/Desktop/R/2019_08_21/02_2019_08_21_changeV.R",
+    "project_path" : "02_2019_08_21_changeV.R",
+    "properties" : {
+        "cursorPosition" : "10,6",
+        "scrollLine" : "0",
+        "tempName" : "Untitled3"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

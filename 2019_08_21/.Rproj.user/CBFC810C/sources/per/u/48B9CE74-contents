@@ -1,0 +1,116 @@
+#데이터 추출/Sampling data
+
+library(dplyr)
+exam <- read.csv("csv_exam.csv")
+exam
+
+#1반만 추출
+exam %>%  filter(class ==1)
+
+#2반만 추출
+exam %>%  filter(class == 2)
+
+#2반이 아닌 경우
+exam %>%  filter(class != 2)
+
+#(초과/미만) 과학 점수가 80점 이상인 경우
+
+exam %>% filter(science >= 80)
+
+# &기호 사용하여 여러 조건 만족하는 행 추출
+## 2반 학생 중 영어가 80점이 넘는 학생의 모음
+
+exam %>% filter(class == 2 & english >80)
+
+# |기호 사용하여 여러 조건 중 하나 만족하는 행 추출
+##수학점수가 90점 이상이거나 영어 점수가 90점 이상인 경우
+
+exam %>%filter(math >90 | english >90)
+
+#목록에 해당하는 행 추출하기 
+##1,4,5반 추출하기
+#ver.1
+exam %>% filter(class == 1| class == 4 |class == 5)
+#ver.2
+exam %>%  filter(class %in% c(1,4,5))
+
+#추출한 행으로 데이터 만들기
+##1반/2반 영어점수 평균 구하기
+
+class1 <- exam %>% filter(class == 1)
+class2 <- exam %>% filter(class == 2)
+
+mean(class1$english)
+mean(class2$english)
+
+##필요만 변수만 추출하기
+###영어 추출
+exam %>% select(english)
+
+##여러 변수 추출하기
+exam %>%  select(class, math, science)
+
+##변수 제외 -아래 예시는 과학&영어 제외
+exam %>%  select(-science, -english)
+
+##filter와 select조합
+##2반 학생들 수학을 뽑아보자
+exam %>%filter(class ==2) %>% select(math)
+
+##오름차순으로 정렬/arrange함수 
+###영어 점수 낮은->높은으로 정렬하기
+exam %>% arrange(english)
+### 내림차순 으로 정렬/ desc 추가 
+exam %>% arrange(desc(english))
+
+###반으로 먼저 정렬 -> 영어 오름차순으로 정렬
+exam %>% arrange(class, english)
+
+##파생변수 추가하기 muatate 이용
+###total 열을 새로 만들어 주기
+exam %>% mutate(total = math+english+science) %>% head
+
+###여러 파생변수 한꺼번에 추가
+###mean도 추가해 보기
+exam %>% mutate(total = math+english+science, 
+                mean = (math+english+science)/3) %>% head
+
+###mutate에 ifelse적용
+##test항목에 영어 80점 이상이면 pass 행 추가 
+exam %>% mutate(test = ifelse(english >=80, "pass", "fail")) %>% head(10)                
+
+##총합을 오름차순으로 정리하기
+exam %>% mutate (total = math+science+english) %>% arrange(total) %>% head(5)
+
+##집단별로 요약하기 - summarise, mutate
+#반 별 영어평균 구해보기 
+exam %>% summarise(mean_english = mean(english))
+
+##아래가 베이스코드
+exam %>% 
+  group_by(class) %>% 
+  summarise(mean_english = mean(english))
+
+#summarise도 여러 요약 통계량을 한꺼번에 산출할 수 있음
+exam %>% 
+  group_by(class) %>% 
+  summarise (mean_math = mean(math),
+             sum_math = sum(math),
+             median_math = median(math),
+             n=n()) #이건 학생 수 /빈도 
+
+#각 집단별로 다시 나누기:group by
+mpg %>% 
+  group_by(manufacturer, drv) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  head(10)
+
+#직접해보세요 p148
+mpg %>% 
+  group_by(manufacturer) %>% 
+  filter(class == "suv") %>% 
+  mutate(tot = (cty+hwy)/2)
+  summarise(mean_tot = mean(tot)) %>% 
+  arrange(desc(tot)) %>% 
+  head(5)
+  
