@@ -1,0 +1,73 @@
+---
+title: "Markdown_trial"
+output:
+  pdf_document: default
+  html_document: default
+---
+install.packages("maps")
+install.packages("ggiraphExtra")
+library(ggiraphExtra)
+install.packages("tibble")
+install.packages("mapproj")
+install.packages("webshot")
+webshot::install_phantomjs()
+```{r}
+library(ggplot2)
+qplot(mtcars$cyl)
+```
+```{r}
+### 미국주별 강력 범죄율 구분도 그려보기
+```
+
+```{r}
+str(USArrests)
+```
+```{r}
+head(USArrests)
+```
+```{r}
+#데이터 전처리
+# tibble()패키지 확인 후, 없을 경우 설치
+#USArrests 데이터 셋은 1973년 미국 주별 강력 범죄율 정보
+```
+
+```{r}
+library(tibble)
+crime <- rownames_to_column(USArrests, var = "state")
+crime$state <- tolower(crime$state)
+str(crime)
+```
+```{r}
+#지도 데이터 준비
+library(ggplot2)
+library(maps)
+states_map <-map_data("state")
+str(states_map)
+```
+```{r}
+head(states_map)
+```
+```{r}
+crime$Murder
+```
+```{r}
+crime$state
+```
+```{r}
+#지도에 표시
+library(ggiraphExtra)
+ggChoropleth(data = crime, #지도표시 데이터 
+             aes(fill = Murder, #지깔로 표현할 변수 
+                 map_id = state), #지역 기준 변수
+             map = states_map) #지도 데이터 
+```
+```{r}
+ggChoropleth(data = crime, #지도표시데이터
+             aes(fill = Murder, #색깔로 표현할 변수 
+                 map_id = state), #지역기준변수 
+             map = states_map, #지도데이터 
+             interactive = T)
+
+```
+
+
